@@ -163,17 +163,24 @@ if start_btn:
                     
                     col1, col2 = st.columns(2)
                     
-                    # 這裡暫時用假的搜尋連結，之後我們會換成你的 Affiliate Link
+                    # 1. 蝦皮：目前先用關鍵字搜尋連結 (等你之後申請蝦皮分潤過了再來換)
                     shopee_url = f"https://shopee.tw/search?keyword={keyword}" 
-                    momo_url = f"https://www.momoshop.com.tw/search/searchShop.jsp?keyword={keyword}"
                     
+                    # 2. Momo (透過通路王)：
+                    # 請把下面這個變數換成你從通路王後台複製來的「Momo 首頁推廣網址」
+                    # 格式通常是: https://www.ichannels.com.tw/redirect.php?k=...
+                    momo_affiliate_home = "https://ibanana.biz/3Oehl" # <--- 改這裡！
+                    
+                    # 稍微優化 UX：雖然是連到首頁，但我們用文字提示用戶
                     with col1:
-                        st.link_button(f"前往 🦐 蝦皮比價 ({keyword})", shopee_url, use_container_width=True)
-                        st.caption("查看銷量與價格")
+                        st.link_button(f"前往 🦐 蝦皮比價", shopee_url, use_container_width=True)
+                        st.caption("查看最新市價")
                     
                     with col2:
-                        st.link_button(f"前往 Ⓜ️ Momo 找現貨", momo_url, use_container_width=True)
-                        st.caption("24h 快速到貨")
+                        # 這裡我們做一個小技巧：
+                        # 雖然只能連到首頁，但我們可以顯示 "前往 Momo (記得搜 {keyword})"
+                        st.link_button(f"前往 Ⓜ️ Momo 領券", momo_affiliate_home, use_container_width=True)
+                        st.caption(f"🔥 點擊後搜尋「{keyword}」享 24h 到貨")
 
                     status.update(label="分析完成！", state="complete", expanded=True)
                         
