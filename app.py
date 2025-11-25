@@ -15,7 +15,16 @@ st.set_page_config(page_title="Truth Lens - 真實風向", page_icon="🔍")
 # 側邊欄：設定 API Key (這樣你就不用把 Key 寫死在程式碼裡，更安全)
 with st.sidebar:
     st.header("⚙️ 設定")
-    api_key = st.text_input("請輸入 Gemini API Key", type="password")
+
+    if "GOOGLE_API_KEY" in st.secrets:
+        api_key = st.secrets["GOOGLE_API_KEY"]
+        # 可以在側邊欄顯示一個提示，讓你知道是用系統 Key
+        with st.sidebar:
+            st.success("✅ 已載入系統 API Key")
+    else:
+        with st.sidebar:
+            api_key = st.text_input("請輸入 Gemini API Key", type="password")
+
     board_option = st.selectbox("選擇看板", ["MobileComm", "PC_Shopping", "Lifeismoney", "Gossiping"])
     
     st.markdown("---")
